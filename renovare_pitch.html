@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Renovare — Clínica Renovare</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#07090e;--ink:#f0ebe0;--navy:#0d1a2e;--navy2:#152540;
+  --teal:#2ab8a8;--teal2:#1a9888;--gold:#d4aa5a;--gold2:#f0cc78;
+  --muted:#8090a8;--bdr:rgba(42,184,168,.15);--bdr2:rgba(212,170,90,.18);
+  --glass:rgba(255,255,255,.035);--paper:#f5f0e8;
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);overflow-x:hidden}
+#prog{position:fixed;top:0;left:0;height:2px;width:0;z-index:500;background:linear-gradient(90deg,var(--teal),var(--gold));transition:width .4s}
+nav{position:fixed;top:0;left:0;right:0;z-index:400;display:flex;align-items:center;justify-content:space-between;padding:15px 52px;background:rgba(7,9,14,.88);backdrop-filter:blur(24px);border-bottom:1px solid var(--bdr)}
+.logo{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:600;letter-spacing:.07em;color:var(--ink)}
+.logo em{color:var(--gold);font-style:italic}
+.nav-prog{font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);padding:5px 14px;border:1px solid rgba(255,255,255,.08);border-radius:20px}
+.ndots{display:flex;gap:7px;align-items:center}
+.ndot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.12);border:none;cursor:pointer;transition:all .3s}
+.ndot.on{background:var(--gold);transform:scale(1.4)}
+.sl{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:108px 64px 72px;opacity:0;transform:translateY(16px);transition:opacity .8s,transform .8s}
+.sl.vis{opacity:1;transform:translateY(0)}
+.ey{font-size:.62rem;letter-spacing:.26em;text-transform:uppercase;color:var(--gold);margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.ey::before{content:'';width:24px;height:1px;background:var(--gold)}
+.H1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.4rem,5vw,4rem);font-weight:300;line-height:1.08;color:var(--ink);margin-bottom:22px}
+.H1 em{font-style:italic;color:var(--gold)}
+.H2{font-family:'Cormorant Garamond',serif;font-size:clamp(1.7rem,3.2vw,2.6rem);font-weight:300;color:var(--ink);margin-bottom:22px;line-height:1.2}
+.H2 em{color:var(--teal);font-style:italic}
+.body{font-size:.95rem;line-height:1.82;color:rgba(240,235,224,.6);max-width:600px;font-weight:300}
+/* S0 CAPA */
+#s0{background:radial-gradient(ellipse 80% 60% at 20% 40%,rgba(42,184,168,.07),transparent 60%),radial-gradient(ellipse 60% 50% at 85% 70%,rgba(212,170,90,.07),transparent 60%),var(--bg);position:relative;overflow:hidden}
+.c-title{font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,7vw,6rem);font-weight:300;line-height:1;color:var(--ink);margin:16px 0 24px;white-space:nowrap}
+.c-title em{display:inline;font-style:italic;font-weight:600;color:transparent;-webkit-text-stroke:1.5px var(--gold)}
+.c-eyebrow{font-size:.62rem;letter-spacing:.28em;text-transform:uppercase;color:var(--teal);display:flex;align-items:center;gap:10px;position:relative}
+.c-eyebrow::before{content:'';width:24px;height:1px;background:var(--teal)}
+.c-desc{font-size:1rem;line-height:1.78;color:rgba(240,235,224,.55);max-width:480px;margin-bottom:40px;position:relative;font-weight:300}
+.c-stats{display:flex;gap:44px;position:relative}
+.sn{font-family:'Cormorant Garamond',serif;font-size:2.8rem;font-weight:600;color:var(--gold);line-height:1}
+.sl2{font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(240,235,224,.35);margin-top:6px}
+.sh{position:absolute;bottom:36px;left:64px;display:flex;align-items:center;gap:10px;color:rgba(240,235,224,.25);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase}
+.sh-l{width:40px;height:1px;background:rgba(240,235,224,.2);animation:sp 2.2s ease-in-out infinite}
+@keyframes sp{0%,100%{opacity:.3;transform:scaleX(.7)}50%{opacity:1;transform:scaleX(1)}}
+/* S1 PROBLEMA */
+#s1{background:var(--navy)}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start;max-width:1060px}
+.pull{font-family:'Cormorant Garamond',serif;font-size:clamp(1.5rem,2.8vw,2rem);font-style:italic;font-weight:300;color:var(--ink);line-height:1.42;border-left:2px solid var(--gold);padding-left:22px;margin-bottom:26px}
+.timeline-cards{display:flex;flex-direction:column;gap:10px}
+.tc-item{display:flex;gap:14px;align-items:flex-start;background:var(--glass);border:1px solid var(--bdr);border-radius:12px;padding:16px 18px;transition:border-color .3s}
+.tc-item:hover{border-color:var(--bdr2)}
+.tc-age{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:600;color:var(--gold);opacity:.5;line-height:1;min-width:52px;flex-shrink:0}
+.tc-t{font-size:.87rem;font-weight:500;color:var(--ink);margin-bottom:3px}
+.tc-d{font-size:.79rem;color:var(--muted);line-height:1.5}
+/* S2 DADOS */
+#s2{background:var(--bg)}
+.data-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:920px;margin-top:8px}
+.data-card{background:var(--glass);border:1px solid var(--bdr);border-radius:16px;padding:28px 22px;transition:all .3s;position:relative;overflow:hidden}
+.data-card::before{content:'';position:absolute;top:-40px;right:-40px;width:100px;height:100px;border-radius:50%;background:radial-gradient(circle,rgba(212,170,90,.06),transparent)}
+.data-card:hover{border-color:var(--bdr2);transform:translateY(-3px)}
+.dc-num{font-family:'Cormorant Garamond',serif;font-size:3.2rem;font-weight:600;color:var(--gold);line-height:1;margin-bottom:8px}
+.dc-unit{font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--teal);margin-bottom:10px}
+.dc-d{font-size:.8rem;color:var(--muted);line-height:1.6}
+.dc-src{font-size:.68rem;color:rgba(128,144,168,.4);margin-top:8px;font-style:italic}
+/* S3 POR QUE FALHA */
+#s3{background:var(--navy)}
+.fail-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;max-width:920px;margin-bottom:28px}
+.fc{background:rgba(200,80,80,.05);border:1px solid rgba(200,80,80,.12);border-radius:14px;padding:22px 20px;transition:all .3s}
+.fc:hover{background:rgba(200,80,80,.09);border-color:rgba(200,80,80,.22)}
+.fc-ico{width:42px;height:42px;border-radius:10px;background:rgba(200,80,80,.1);display:flex;align-items:center;justify-content:center;margin-bottom:12px}
+.fc-t{font-size:.9rem;font-weight:500;color:rgba(255,180,180,.9);margin-bottom:6px}
+.fc-d{font-size:.8rem;color:var(--muted);line-height:1.58}
+.stat-band{background:linear-gradient(135deg,rgba(42,184,168,.12),rgba(212,170,90,.08));border:1px solid var(--bdr);border-radius:16px;padding:24px 28px;display:flex;align-items:center;gap:28px;max-width:920px}
+.sb-num{font-family:'Cormorant Garamond',serif;font-size:3.8rem;font-weight:600;color:var(--teal);line-height:1;flex-shrink:0}
+.sb-text{font-size:.9rem;color:rgba(240,235,224,.7);line-height:1.7}
+.sb-text strong{color:var(--ink)}
+/* S4 PILARES */
+#s4{background:var(--bg)}
+.pillars-wrap{display:grid;grid-template-columns:1fr 1fr;gap:48px;max-width:1000px;align-items:center}
+.pillar-radar{background:var(--glass);border:1px solid var(--bdr);border-radius:20px;padding:32px 28px}
+.pr-title{font-family:'Cormorant Garamond',serif;font-size:1rem;font-style:italic;color:var(--gold);margin-bottom:20px;text-align:center}
+.pillar-hex{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.ph{background:rgba(42,184,168,.06);border:1px solid var(--bdr);border-radius:12px;padding:14px 12px;text-align:center;transition:all .3s}
+.ph:hover{background:rgba(42,184,168,.12);transform:translateY(-2px)}
+.ph-ico{width:38px;height:38px;border-radius:9px;background:rgba(212,170,90,.1);display:flex;align-items:center;justify-content:center;margin:0 auto 8px}
+.ph-n{font-size:.68rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:rgba(240,235,224,.7)}
+.tracks-list{display:flex;flex-direction:column;gap:14px}
+.track{background:var(--glass);border:1px solid var(--bdr);border-radius:14px;padding:20px 20px;transition:all .3s}
+.track:hover{border-color:var(--bdr2)}
+.track-label{font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:8px}
+.track-t{font-size:.92rem;font-weight:500;color:var(--ink);margin-bottom:5px}
+.track-d{font-size:.8rem;color:var(--muted);line-height:1.55}
+/* S5 DIFERENCIAL */
+#s5{background:var(--navy2)}
+.dif-grid{display:grid;grid-template-columns:1fr 1fr;gap:52px;max-width:1000px;align-items:start}
+.dif-list{display:flex;flex-direction:column;gap:14px;margin-top:8px}
+.dif-item{display:flex;gap:14px;align-items:flex-start;background:var(--glass);border:1px solid var(--bdr);border-radius:12px;padding:18px 18px;transition:border-color .3s}
+.dif-item:hover{border-color:rgba(212,170,90,.35)}
+.di-num{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:600;color:var(--gold);opacity:.4;line-height:1;min-width:32px;flex-shrink:0}
+.di-t{font-size:.88rem;font-weight:500;color:var(--ink);margin-bottom:4px}
+.di-d{font-size:.8rem;color:var(--muted);line-height:1.55}
+.curve-box{background:rgba(42,184,168,.05);border:1px solid var(--bdr);border-radius:20px;padding:30px 26px}
+.cb-title{font-family:'Cormorant Garamond',serif;font-size:1rem;font-style:italic;color:var(--teal);margin-bottom:18px}
+.curve-svg{width:100%;height:120px}
+.cb-leg{display:flex;flex-direction:column;gap:8px;margin-top:14px}
+.cb-l{display:flex;align-items:center;gap:8px;font-size:.78rem;color:var(--muted)}
+.cb-dot{width:9px;height:9px;border-radius:50%}
+.cb-q{margin-top:16px;padding:12px 16px;background:rgba(212,170,90,.06);border-radius:8px;font-size:.79rem;font-style:italic;color:rgba(240,235,224,.55);line-height:1.6}
+/* S6 JORNADA */
+#s6{background:var(--bg)}
+.journey-wrap{max-width:920px}
+.ph-hd{font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:var(--teal);display:flex;align-items:center;gap:10px;margin-bottom:14px;margin-top:24px}
+.ph-hd::before{content:'';width:20px;height:1px;background:var(--teal)}
+.consults{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+.cc{flex:1;min-width:180px;background:var(--glass);border:1px solid var(--bdr);border-radius:14px;padding:20px 18px;transition:all .3s}
+.cc:hover{background:rgba(42,184,168,.06);border-color:var(--bdr);transform:translateY(-3px)}
+.cc-n{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:600;color:var(--gold);opacity:.4;line-height:1;margin-bottom:10px}
+.cc-t{font-size:.87rem;font-weight:500;color:var(--ink);margin-bottom:4px}
+.cc-time{display:inline-block;font-size:.66rem;letter-spacing:.08em;color:var(--teal);background:rgba(42,184,168,.1);border-radius:4px;padding:2px 8px;margin-bottom:9px}
+.cc-d{font-size:.78rem;color:var(--muted);line-height:1.55}
+.ci-band{background:rgba(212,170,90,.06);border:1px solid var(--bdr2);border-radius:14px;padding:18px 22px;display:flex;align-items:center;gap:18px}
+.ci-ico{width:42px;height:42px;border-radius:10px;background:rgba(212,170,90,.1);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.ci-t{font-size:.87rem;font-weight:500;color:var(--ink);margin-bottom:3px}
+.ci-d{font-size:.77rem;color:var(--muted);line-height:1.5}
+/* S7 ENTREGÁVEIS */
+#s7{background:var(--navy)}
+.del-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;max-width:860px}
+.del{display:flex;gap:14px;align-items:flex-start;background:var(--glass);border:1px solid var(--bdr);border-radius:12px;padding:16px 18px;transition:all .3s}
+.del:hover{border-color:var(--bdr2)}
+.del-ico{width:38px;height:38px;border-radius:9px;background:rgba(42,184,168,.1);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.del-t{font-size:.87rem;font-weight:500;color:var(--ink);margin-bottom:3px}
+.del-d{font-size:.77rem;color:var(--muted);line-height:1.45}
+/* S8 INVEST */
+#s8{background:radial-gradient(ellipse 70% 60% at 50% 40%,rgba(42,184,168,.07),transparent 65%),var(--bg);align-items:center;text-align:center;position:relative;overflow:hidden}
+.inv-T{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,4vw,3rem);font-weight:300;color:var(--ink);max-width:580px;margin:0 auto 12px;line-height:1.2;position:relative}
+.inv-T em{font-style:italic;color:var(--gold)}
+.inv-sub{font-size:.9rem;color:var(--muted);max-width:440px;margin:0 auto 36px;line-height:1.72;font-weight:300;position:relative}
+.price-cards{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;position:relative}
+.pc-wrap{background:var(--glass);border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:34px 40px;min-width:200px;transition:all .3s}
+.pc-wrap:hover{background:rgba(42,184,168,.1);border-color:var(--bdr)}
+.pc-wrap.hi{border-color:var(--gold);background:rgba(212,170,90,.07)}
+.pc-lbl{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+.pc-val{font-family:'Cormorant Garamond',serif;font-size:3.2rem;font-weight:600;color:var(--ink);line-height:1}
+.pc-val sup{font-size:1.3rem;vertical-align:super;font-weight:300}
+.pc-det{font-size:.78rem;color:var(--muted);margin-top:6px}
+.ivl-list{display:flex;flex-direction:column;gap:10px;max-width:500px;margin:28px auto 0;position:relative}
+.ivl{display:flex;align-items:center;gap:12px;font-size:.84rem;color:rgba(240,235,224,.6);text-align:left}
+.ivl-c{width:20px;height:20px;border-radius:50%;background:var(--teal2);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.anchor{margin-top:24px;font-family:'Cormorant Garamond',serif;font-size:.98rem;font-style:italic;color:rgba(240,235,224,.35);position:relative}
+.anchor strong{color:var(--gold);font-style:normal;font-family:'DM Sans',sans-serif;font-weight:400}
+.cta-btn{display:inline-block;margin-top:28px;padding:14px 48px;border-radius:50px;background:linear-gradient(135deg,var(--teal2),var(--teal));color:#07090e;font-family:'DM Sans',sans-serif;font-size:.82rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;transition:all .3s;position:relative}
+.cta-btn:hover{transform:translateY(-3px);box-shadow:0 14px 36px rgba(42,184,168,.25)}
+/* S9 FINAL */
+#s9{background:var(--navy);align-items:center;text-align:center}
+.fin-T{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,5vw,3.6rem);font-weight:300;line-height:1.1;max-width:640px;margin:0 auto 20px}
+.fin-T em{font-style:italic;color:var(--gold)}
+.fin-sub{font-size:.95rem;color:var(--muted);max-width:440px;margin:0 auto 36px;line-height:1.72;font-weight:300}
+.contacts{display:flex;gap:44px;justify-content:center;flex-wrap:wrap;margin-bottom:40px}
+.ci .cl{font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+.ci .cv{font-size:.88rem;color:var(--ink);font-weight:500}
+.fin-brand{font-size:.72rem;color:rgba(255,255,255,.18);letter-spacing:.1em}
+@media(max-width:780px){
+  .sl{padding:90px 22px 52px}
+  nav{padding:12px 18px}
+  .two-col,.data-grid,.fail-grid,.pillars-wrap,.dif-grid,.del-grid{grid-template-columns:1fr}
+  .price-cards{flex-direction:column;align-items:center}
+  .consults{flex-direction:column}
+  .ndots{display:none}
+}
+</style>
+</head>
+<body>
+<div id="prog"></div>
+<nav>
+  <div class="logo">Clínica <em>Renovare</em></div>
+  <div class="nav-prog">Renovare · Longevidade 30–65</div>
+  <div class="ndots" id="ndots"></div>
+</nav>
+
+<!-- S0 CAPA -->
+<section class="sl" id="s0">
+  <div class="c-eyebrow">Dr. Vinícius B. Narciso · Reumatologista · Medicina do Estilo de Vida</div>
+  <div class="c-title"><em>Renovare</em></div>
+  <p class="c-desc">Um programa médico anual de longevidade ativa para adultos de 30 a 65 anos que querem mais energia, saúde e qualidade de vida — com método, métricas e acompanhamento real.</p>
+  <div class="c-stats">
+    <div><div class="sn">6</div><div class="sl2">Consultas no Ano</div></div>
+    <div><div class="sn">12</div><div class="sl2">Meses de Suporte</div></div>
+    <div><div class="sn">5'</div><div class="sl2">Check-in Semanal</div></div>
+  </div>
+  <div class="sh"><div class="sh-l"></div>Role para conhecer</div>
+</section>
+
+<!-- S1 O PROBLEMA -->
+<section class="sl" id="s1">
+  <div class="ey">O que acontece com o tempo</div>
+  <div class="two-col">
+    <div>
+      <h2 class="H1">Sem intervenção, o corpo de 30 a 65 anos <em>muda em silêncio.</em></h2>
+      <p class="body">A maioria das pessoas percebe a mudança quando ela já se instalou: energia caindo, exames saindo do ideal, peso crescendo devagar, sono piorando. Não acontece de repente — acontece gradualmente, enquanto a rotina segue igual.</p>
+    </div>
+    <div>
+      <div class="timeline-cards">
+        <div class="tc-item"><div class="tc-age">30</div><div><div class="tc-t">Perda muscular começa</div><div class="tc-d">A partir dos 30, perdemos 3–8% de massa muscular por década sem estímulo de resistência. Metabolismo desacelera.</div></div></div>
+        <div class="tc-item"><div class="tc-age">40</div><div><div class="tc-t">Risco metabólico sobe</div><div class="tc-d">Resistência insulínica, pressão e colesterol começam a sair do ideal. Gordura visceral aumenta mesmo sem mudança de peso.</div></div></div>
+        <div class="tc-item"><div class="tc-age">50</div><div><div class="tc-t">Soma de fatores</div><div class="tc-d">Sono ruim, estresse crônico, sedentarismo e inflamação sistêmica de baixo grau se acumulam — o risco cardiovascular dobra.</div></div></div>
+        <div class="tc-item"><div class="tc-age">60</div><div><div class="tc-t">Qualidade de vida em jogo</div><div class="tc-d">Quem não interveio nos anos anteriores chega aqui com doenças estabelecidas, limitação funcional e menor longevidade saudável.</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- S2 DADOS -->
+<section class="sl" id="s2">
+  <div class="ey">A evidência científica</div>
+  <h2 class="H2">Números que mostram o que <em>está em jogo</em></h2>
+  <div class="data-grid">
+    <div class="data-card"><div class="dc-num">80%</div><div class="dc-unit">redução de risco cardiovascular</div><div class="dc-d">As doenças cardiovasculares são preveníveis com mudança estruturada de estilo de vida — alimentação, movimento, sono e estresse.</div><div class="dc-src">Yusuf et al., INTERHEART Study · Lancet 2004</div></div>
+    <div class="data-card"><div class="dc-num">3–8%</div><div class="dc-unit">perda muscular por década</div><div class="dc-d">A sarcopenia começa aos 30 e acelera sem intervenção. Força muscular é o melhor marcador individual de longevidade saudável.</div><div class="dc-src">Cruz-Jentoft et al., Age and Ageing 2019</div></div>
+    <div class="data-card"><div class="dc-num">2×</div><div class="dc-unit">mais adesão com acompanhamento</div><div class="dc-d">Pacientes com acompanhamento médico estruturado têm o dobro de adesão a hábitos saudáveis comparados a quem recebe orientação avulsa.</div><div class="dc-src">Bodenheimer & Handley, Patient Education 2009</div></div>
+  </div>
+</section>
+
+<!-- S3 POR QUE FALHA -->
+<section class="sl" id="s3">
+  <div class="ey">Por que as tentativas habituais não funcionam</div>
+  <h2 class="H2">O que <em>impede</em> a mudança duradoura</h2>
+  <div class="fail-grid">
+    <div class="fc"><div class="fc-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(220,80,80,.8)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div><div class="fc-t">Check-ups sem plano de ação</div><div class="fc-d">Exames mostram o problema mas ninguém monta o plano. O paciente sai sabendo que precisa mudar, sem saber como.</div></div>
+    <div class="fc"><div class="fc-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(220,80,80,.8)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><div class="fc-t">Informação sem execução</div><div class="fc-d">"Sei que preciso dormir melhor, me exercitar e comer bem." Saber não é suficiente. Executar com consistência exige estrutura.</div></div>
+    <div class="fc"><div class="fc-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(220,80,80,.8)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="23" y1="11" x2="17" y2="11"/></svg></div><div class="fc-t">Sem acompanhamento longitudinal</div><div class="fc-d">A motivação dura dias. Sem alguém acompanhando, qualquer recaída vira abandono total. A vida corrida vence o plano.</div></div>
+  </div>
+  <div class="stat-band">
+    <div class="sb-num">95%</div>
+    <div class="sb-text"><strong>das pessoas que tentam mudar hábitos sozinhas voltam ao ponto de partida</strong> em menos de 6 meses. Não por falta de força de vontade — por falta de estrutura, métricas e acompanhamento.<br><span style="font-size:.76rem;opacity:.5;margin-top:4px;display:block">Prochaska & Velicer, American Journal of Health Promotion · 1997</span></div>
+  </div>
+</section>
+
+<!-- S4 PILARES -->
+<section class="sl" id="s4">
+  <div class="ey">A abordagem</div>
+  <div class="pillars-wrap">
+    <div>
+      <h2 class="H2">Os seis pilares que constroem <em>longevidade real</em></h2>
+      <p class="body" style="margin-bottom:24px">O programa trabalha todos os pilares de forma integrada — com um track personalizado que define o foco principal para o seu momento de vida.</p>
+      <div class="pillar-hex">
+        <div class="ph"><div class="ph-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#d4aa5a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="2"/><path d="M12 7v6l-3 3m3-3 3 3"/><path d="M9 17l-2 3m8-3 2 3"/></svg></div><div class="ph-n">Movimento</div></div>
+        <div class="ph"><div class="ph-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#d4aa5a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8C8 10 5.9 16.17 3.82 19.34A1 1 0 0 0 4.8 21C8 20 15 18 18 13l-1-1 2-2c1-3-1-7-2-8z"/><path d="M3 21l4-4"/></svg></div><div class="ph-n">Alimentação</div></div>
+        <div class="ph"><div class="ph-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#d4aa5a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></div><div class="ph-n">Sono</div></div>
+        <div class="ph"><div class="ph-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#d4aa5a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96-.46 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.44-2.64A2.5 2.5 0 0 1 9.5 2Z"/></svg></div><div class="ph-n">Estresse</div></div>
+        <div class="ph"><div class="ph-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#d4aa5a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div><div class="ph-n">Conexões</div></div>
+        <div class="ph"><div class="ph-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#d4aa5a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg></div><div class="ph-n">Substâncias</div></div>
+      </div>
+    </div>
+    <div>
+      <div class="tracks-list">
+        <div class="track"><div class="track-label">Track 1</div><div class="track-t">Composição Corporal e Força</div><div class="track-d">Foco em redução de gordura visceral, ganho de massa muscular e condicionamento físico.</div></div>
+        <div class="track"><div class="track-label">Track 2</div><div class="track-t">Energia, Sono e Estresse</div><div class="track-d">Foco em qualidade do sono, fadiga, manejo do estresse e organização de rotina.</div></div>
+        <div class="track"><div class="track-label">Track 3</div><div class="track-t">Risco Cardiometabólico</div><div class="track-d">Foco em pré-diabetes, hipertensão, dislipidemia, esteatose e prevenção cardiovascular.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- S5 DIFERENCIAL -->
+<section class="sl" id="s5">
+  <div class="ey" style="color:var(--teal)">O que nos diferencia</div>
+  <div class="dif-grid">
+    <div>
+      <h2 class="H2">Saúde não melhora com informação.<br><em>Melhora com consistência.</em></h2>
+      <p class="body" style="margin-bottom:8px">O Renovare entrega o que consultas avulsas não conseguem — presença, dados e estrutura ao longo do tempo.</p>
+      <div class="dif-list">
+        <div class="dif-item"><div class="di-num">01</div><div><div class="di-t">Bioimpedância e Dinamometria</div><div class="di-d">Composição corporal e força muscular medidas em cada reavaliação. Você vê em números o que mudou — não depende de sensação.</div></div></div>
+        <div class="dif-item"><div class="di-num">02</div><div><div class="di-t">Médico presente ao longo do ano</div><div class="di-d">Check-ins semanais e WhatsApp para ajustes. O plano vive entre as consultas, não apenas dentro delas.</div></div></div>
+        <div class="dif-item"><div class="di-num">03</div><div><div class="di-t">Plano que se adapta — não abandona</div><div class="di-d">Quando a rotina complica, ajustamos juntos. Recaída não é fracasso — é informação. Protocolo de reinício sem culpa.</div></div></div>
+      </div>
+    </div>
+    <div>
+      <div class="curve-box">
+        <div class="cb-title">Trajetória típica ao longo do programa</div>
+        <svg class="curve-svg" viewBox="0 0 400 120" preserveAspectRatio="none">
+          <defs><linearGradient id="g1" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#2ab8a8" stop-opacity=".7"/><stop offset="100%" stop-color="#d4aa5a"/></linearGradient></defs>
+          <path d="M0,100 C30,95 60,108 100,106 C130,104 160,115 200,113 C240,111 270,118 310,116 C350,114 375,118 400,117" stroke="rgba(220,80,80,.35)" stroke-width="2" fill="none" stroke-dasharray="7,4"/>
+          <path d="M0,110 C50,100 90,84 130,68 C170,52 210,38 250,26 C290,14 340,8 400,5" stroke="url(#g1)" stroke-width="2.5" fill="none"/>
+          <circle cx="0" cy="110" r="5" fill="#2ab8a8"/><circle cx="87" cy="75" r="5" fill="#2ab8a8"/><circle cx="174" cy="50" r="5" fill="#2ab8a8"/>
+          <circle cx="261" cy="28" r="5" fill="#d4aa5a"/><circle cx="330" cy="14" r="5" fill="#d4aa5a"/><circle cx="400" cy="5" r="5" fill="#d4aa5a"/>
+        </svg>
+        <div class="cb-leg">
+          <div class="cb-l"><div class="cb-dot" style="background:var(--teal)"></div>Com acompanhamento estruturado</div>
+          <div class="cb-l"><div class="cb-dot" style="background:rgba(220,80,80,.5)"></div>Sem acompanhamento</div>
+        </div>
+        <div class="cb-q">"O que diferencia quem muda de quem tenta é ter estrutura, métricas e alguém que não deixa você desistir."</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- S6 JORNADA -->
+<section class="sl" id="s6">
+  <div class="ey">A jornada</div>
+  <h2 class="H2">6 consultas. <em>Um ano inteiro do seu lado.</em></h2>
+  <div class="journey-wrap">
+    <div class="ph-hd">Fase Intensiva — Primeiros 90 dias</div>
+    <div class="consults">
+      <div class="cc"><div class="cc-n">01</div><div class="cc-t">Diagnóstico de Estilo de Vida</div><div class="cc-time">90 min</div><div class="cc-d">Avaliação dos 6 pilares, bioimpedância, dinamometria, track principal e plano</div></div>
+      <div class="cc"><div class="cc-n">02</div><div class="cc-t">Ajustes e Aderência</div><div class="cc-time">30–40 min</div><div class="cc-d">Check-ins, barreiras, progressão de metas</div></div>
+      <div class="cc"><div class="cc-n">03</div><div class="cc-t">Consolidação</div><div class="cc-time">30–40 min</div><div class="cc-d">Resultados da fase intensiva e transição para manutenção</div></div>
+    </div>
+    <div class="ph-hd">Fase de Manutenção — 4.º ao 12.º mês</div>
+    <div class="consults">
+      <div class="cc"><div class="cc-n">04</div><div class="cc-t">Revisão Trimestral</div><div class="cc-time">30 min</div><div class="cc-d">Métricas e ajuste de metas</div></div>
+      <div class="cc"><div class="cc-n">05</div><div class="cc-t">Revisão Semestral</div><div class="cc-time">30 min</div><div class="cc-d">Reforço de hábitos</div></div>
+      <div class="cc"><div class="cc-n">06</div><div class="cc-t">Reavaliação Anual</div><div class="cc-time">60 min</div><div class="cc-d">Resultados do ano e próximo ciclo</div></div>
+    </div>
+    <div class="ci-band">
+      <div class="ci-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#d4aa5a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><circle cx="12" cy="17" r="1"/></svg></div>
+      <div><div class="ci-t">Check-in semanal + acesso ao médico entre consultas</div><div class="ci-d">Formulário de 5 minutos — energia, sono, treino, estresse. Ajustes e dúvidas via WhatsApp. O plano vive entre as consultas.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- S7 ENTREGÁVEIS -->
+<section class="sl" id="s7">
+  <div class="ey">O que você recebe</div>
+  <h2 class="H2">Tudo que você precisa para <em>realmente evoluir</em></h2>
+  <div class="del-grid">
+    <div class="del"><div class="del-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2ab8a8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4.8 2.3A.3.3 0 1 0 5 2H4a2 2 0 0 0-2 2v5a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6V4a2 2 0 0 0-2-2h-1"/><path d="M8 15v1a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6v-4"/><circle cx="20" cy="10" r="2"/></svg></div><div><div class="del-t">6 consultas médicas no ano</div><div class="del-d">Fase intensiva (3) + manutenção (3)</div></div></div>
+    <div class="del"><div class="del-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2ab8a8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 15c6.667-6 13.333 0 20-6"/><path d="M9 22c1.798-3.333 5.8-4.5 9-4"/><path d="M7 2c1.798 3.333 5.8 4.5 9 4"/><path d="M2 9c6.667 6 13.333 0 20 6"/></svg></div><div><div class="del-t">Bioimpedância</div><div class="del-d">Composição corporal: massa muscular, gordura visceral, metabolismo</div></div></div>
+    <div class="del"><div class="del-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2ab8a8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div><div><div class="del-t">Dinamometria</div><div class="del-d">Força muscular — marcador de longevidade medido nas reavaliações</div></div></div>
+    <div class="del"><div class="del-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2ab8a8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><circle cx="12" cy="17" r="1"/></svg></div><div><div class="del-t">Check-ins + WhatsApp</div><div class="del-d">Acompanhamento semanal e acesso ao médico para dúvidas combinadas</div></div></div>
+    <div class="del"><div class="del-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2ab8a8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div><div><div class="del-t">Track personalizado</div><div class="del-d">Composição corporal, energia/rotina ou risco cardiometabólico</div></div></div>
+    <div class="del"><div class="del-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2ab8a8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><div><div class="del-t">Rede multiprofissional</div><div class="del-d">Nutrição, educação física e psicologia quando indicado</div></div></div>
+  </div>
+</section>
+
+<!-- S8 INVESTIMENTO -->
+<section class="sl" id="s8">
+  <div class="inv-T">Você não está pagando por consultas.<br>Está investindo em <em>ter um médico do seu lado.</em></div>
+  <p class="inv-sub">Os pacientes escolhem o plano porque ele oferece acompanhamento contínuo, resultados mensuráveis com dados reais e uma abordagem que vai além de medicamentos.</p>
+  <div class="price-cards">
+    <div class="pc-wrap"><div class="pc-lbl">Parcelado no cartão</div><div class="pc-val"><sup>12×</sup> R$400</div><div class="pc-det">Total R$ 4.800 · sem juros</div></div>
+    <div class="pc-wrap hi"><div class="pc-lbl">À vista</div><div class="pc-val">R$4.000</div><div class="pc-det">Economia de R$ 800</div></div>
+  </div>
+  <div class="ivl-list">
+    <div class="ivl"><div class="ivl-c"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Proximidade real com seu médico ao longo do ano</div>
+    <div class="ivl"><div class="ivl-c"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Bioimpedância e dinamometria em cada reavaliação</div>
+    <div class="ivl"><div class="ivl-c"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Check-ins semanais que mantêm o plano vivo</div>
+    <div class="ivl"><div class="ivl-c"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Suporte nos momentos difíceis — você não fica sozinho</div>
+  </div>
+  <p class="anchor">Menos de <strong>R$ 14 por dia</strong> — com um médico especialista ao longo do ano.</p>
+  <a href="https://wa.me/5549991865646" class="cta-btn" target="_blank">Quero começar</a>
+</section>
+
+<!-- S9 FINAL -->
+<section class="sl" id="s9">
+  <p class="ey" style="justify-content:center">O próximo passo</p>
+  <div class="fin-T">Sua saúde nos próximos anos <em>começa hoje.</em></div>
+  <p class="fin-sub">A consulta inicial é o ponto de partida — avaliação completa, plano claro para os próximos 12 meses.</p>
+  <a href="https://wa.me/5549991865646" class="cta-btn" target="_blank">Agendar pelo WhatsApp</a>
+  <div class="contacts" style="margin-top:32px">
+    <div class="ci"><div class="cl">WhatsApp</div><div class="cv">(49) 99186-5646</div></div>
+    <div class="ci"><div class="cl">Instagram</div><div class="cv">@drviniciusnarciso</div></div>
+    <div class="ci"><div class="cl">Site</div><div class="cv">drviniciusnarciso.com.br</div></div>
+  </div>
+  <div class="fin-brand" style="margin-top:36px">Dr. Vinícius B. Narciso · Reumatologista · Medicina do Estilo de Vida · CRM-SC 11855 · Lages, SC</div>
+</section>
+
+<script>
+const slides=[...document.querySelectorAll('.sl')];
+const dotsEl=document.getElementById('ndots');
+slides.forEach((_,i)=>{const d=document.createElement('button');d.className='ndot'+(i===0?' on':'');d.onclick=()=>slides[i].scrollIntoView({behavior:'smooth'});dotsEl.appendChild(d)});
+const allDots=[...dotsEl.querySelectorAll('.ndot')];
+const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');const i=slides.indexOf(e.target);allDots.forEach((d,j)=>d.classList.toggle('on',j===i));document.getElementById('prog').style.width=(i/(slides.length-1)*100)+'%'}})},{threshold:.28});
+slides.forEach(s=>obs.observe(s));
+</script>
+</body>
+</html>
